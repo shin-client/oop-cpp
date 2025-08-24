@@ -1,0 +1,7 @@
+BasedOnStyle: Google
+ColumnLimit: 120
+PointerAlignment: Right
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+FixNamespaceComments: false
+SeparateDefinitionBlocks: Always
