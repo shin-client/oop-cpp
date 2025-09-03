@@ -1,67 +1,50 @@
 #include <iostream>
+#include <memory>
 #include <string>
 
-class Woman {
+class Vehicle {
  public:
-  Woman(std::string fullName, int age, float weight, float height) {
-    this->fullName = fullName;
-    this->age      = age;
-    this->weight   = weight;
-    this->height   = height;
-  }
+  Vehicle() { std::cout << "Created Vehicle\n"; }
 
-  void showInfo() {
-    std::cout << "Full name: " << fullName << "\n";
-    std::cout << "Age: " << age << "\n";
-    std::cout << "Weight: " << weight << "\n";
-  }
+  std::string getModelName() { return modelName; }
 
-  int getAge() { return age; }
+  void setModelName(std::string modelName) { this->modelName = modelName; }
 
-  void setAge(int age) { this->age = age; }
+  void setVersion(int version) { this->version = version; }
 
-  float getWeight() { return weight; }
-
-  float getHeight() { return height; }
+ protected:
+  void run() { std::cout << "Vehicle is running..."; }
 
  private:
-  std::string fullName;
-  int         age;
-  float       weight;
-  float       height;
+  std::string modelName;
+  int         version;
 };
 
-class HealthChecker {
+class Taxi : public Vehicle {
  public:
-  void check(Woman *woman) {
-    weight        = woman->getWeight();
-    height        = woman->getHeight();
-    bloodPressure = 130;
-    heartBeat     = 80;
+  Taxi() { std::cout << "Created Taxi\n"; }
+
+  void run() {
+    Vehicle::run();
+    std::cout << "This is a taxi.";
   }
 
-  std::string getResult() {
-    float BMI = weight / (height * height);
-    std::cout << BMI;
-    if (BMI >= 18.5 && BMI <= 24.9 && bloodPressure >= 120 && bloodPressure < 140 && heartBeat >= 60 && heartBeat < 100)
-      return "Normal";
-    return "Abnormal";
-  }
+  void run(int km) { kmCounter = km; }
+
+  int calculateFee() { return kmCounter * 10000; }
 
  private:
-  float weight;
-  float height;
-  int   bloodPressure;
-  int   heartBeat;
+  int kmCounter;
 };
+
+class Truck : public Vehicle {};
 
 int main() {
-  Woman         *hariwon = new Woman("Hariwon", 32, 55, 1.65);
-  HealthChecker *checker = new HealthChecker();
+  std::unique_ptr<Taxi> taxi = std::make_unique<Taxi>();
 
-  checker->check(hariwon);
-  std::string result = checker->getResult();
+  taxi->run(10);
 
-  std::cout << result;
+  std::cout << taxi->calculateFee() << " VND\n";
+
   return 0;
 }
