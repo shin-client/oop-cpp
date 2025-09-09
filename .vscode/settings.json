@@ -46,7 +46,13 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp",
-    "format": "cpp"
+    "format": "cpp",
+    "charconv": "cpp",
+    "cstring": "cpp",
+    "ctime": "cpp",
+    "span": "cpp",
+    "cinttypes": "cpp",
+    "variant": "cpp"
   },
   "C_Cpp.default.compileCommands": [
     ""
