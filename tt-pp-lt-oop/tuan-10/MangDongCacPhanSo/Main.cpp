@@ -1,15 +1,15 @@
 #include "MyPhanSoArray.h"
 
 int main() {
-	MyPhanSoArray* phanSoArr = new MyPhanSoArray();
+  MyPhanSoArray *phanSoArr = new MyPhanSoArray();
 
-	cin >> phanSoArr;
-	cout << phanSoArr;
+  cin >> phanSoArr;
+  cout << phanSoArr;
 
-	PhanSo* max = phanSoArr->findMax();
-	cout << "Phan so lon nhat: ";
-	cout << max;
+  PhanSo *max = phanSoArr->findMax();
+  cout << "Phan so lon nhat: ";
+  cout << max;
 
-	system("pause");
-	return 0;
+  system("pause");
+  return 0;
 }

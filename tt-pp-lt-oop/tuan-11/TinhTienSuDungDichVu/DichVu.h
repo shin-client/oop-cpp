@@ -5,16 +5,15 @@
 using namespace std;
 
 class DichVu {
-protected:
-	string tenDichVu;
-public:
-	DichVu(string ten): tenDichVu(ten) {}
+ protected:
+  string tenDichVu;
 
-	virtual void xuat() const {
-		cout << "Dich vu: " << tenDichVu << endl;
-	}
+ public:
+  DichVu(string ten) : tenDichVu(ten) {}
 
-	virtual float tinhTien() const = 0;
+  virtual void xuat() const { cout << "Dich vu: " << tenDichVu << endl; }
 
-	virtual ~DichVu() {}
+  virtual float tinhTien() const = 0;
+
+  virtual ~DichVu() {}
 };

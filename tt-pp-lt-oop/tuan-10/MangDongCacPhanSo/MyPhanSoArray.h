@@ -2,248 +2,244 @@
 #include "PhanSo.h"
 
 class MyPhanSoArray {
-private:
-	PhanSo** phanSoArr;
-	int size;
-	
-	void clearArray() {
-		if (phanSoArr != nullptr) {
-			for (int i = 0; i < size; ++i) {
-				delete phanSoArr[i];
-			}
+ private:
+  PhanSo **phanSoArr;
+  int      size;
 
-			delete[] phanSoArr;
-		}
-		phanSoArr = nullptr;
-		size = 0;
-	}
-public:
-	MyPhanSoArray() : phanSoArr(nullptr), size(0) {}
+  void clearArray() {
+    if (phanSoArr != nullptr) {
+      for (int i = 0; i < size; ++i) {
+        delete phanSoArr[i];
+      }
 
-	MyPhanSoArray(int size) {
-		this->size = (size > 0) ? size : 0;
-		if (this->size > 0) {
-			this->phanSoArr = new PhanSo * [this->size];
-			for (int i = 0; i < this->size; ++i) {
-				this->phanSoArr[i] = new PhanSo();
-			}
-		}
-		else {
-			this->phanSoArr = nullptr;
-		}
-	}
+      delete[] phanSoArr;
+    }
+    phanSoArr = nullptr;
+    size      = 0;
+  }
 
-	MyPhanSoArray(PhanSo** p, int size) {
-		this->size = (size > 0) ? size : 0;
-		if (this->size > 0 && p != nullptr) {
-			this->phanSoArr = new PhanSo * [this->size];
-			for (int i = 0; i < this->size; ++i) {
-				if (p[i] != nullptr) {
-					this->phanSoArr[i] = new PhanSo(p[i]);
-				}
-				else {
-					this->phanSoArr[i] = nullptr;
-				}
-			}
-		}
-		else {
-			this->phanSoArr = nullptr;
-		}
-	}
+ public:
+  MyPhanSoArray() : phanSoArr(nullptr), size(0) {}
 
-	~MyPhanSoArray() { clearArray(); }
+  MyPhanSoArray(int size) {
+    this->size = (size > 0) ? size : 0;
+    if (this->size > 0) {
+      this->phanSoArr = new PhanSo *[this->size];
+      for (int i = 0; i < this->size; ++i) {
+        this->phanSoArr[i] = new PhanSo();
+      }
+    } else {
+      this->phanSoArr = nullptr;
+    }
+  }
 
-	void setSize(const int& newSize) {
-		if (this->size != newSize) {
-			clearArray();
-			this->size = (newSize > 0) ? newSize : 0;
-			if (this->size > 0) {
-				this->phanSoArr = new PhanSo * [this->size];
-				for (int i = 0; i < this->size; ++i) {
-					this->phanSoArr[i] = new PhanSo();
-				}
-			}
-		}
-	}
+  MyPhanSoArray(PhanSo **p, int size) {
+    this->size = (size > 0) ? size : 0;
+    if (this->size > 0 && p != nullptr) {
+      this->phanSoArr = new PhanSo *[this->size];
+      for (int i = 0; i < this->size; ++i) {
+        if (p[i] != nullptr) {
+          this->phanSoArr[i] = new PhanSo(p[i]);
+        } else {
+          this->phanSoArr[i] = nullptr;
+        }
+      }
+    } else {
+      this->phanSoArr = nullptr;
+    }
+  }
 
-	void setArr(PhanSo** ps, int newSize) {
-		clearArray();
-		this->size = (newSize > 0) ? newSize : 0;
-		if (this->size > 0 && ps != nullptr) {
-			this->phanSoArr = new PhanSo * [this->size];
-			for (int i = 0; i < this->size; ++i) {
-				if (ps[i] != nullptr) {
-					this->phanSoArr[i] = new PhanSo(ps[i]);
-				}
-				else {
-					this->phanSoArr[i] = nullptr;
-				}
-			}
-		}
-	}
+  ~MyPhanSoArray() { clearArray(); }
 
-	int getSize() const { return size; }
+  void setSize(const int &newSize) {
+    if (this->size != newSize) {
+      clearArray();
+      this->size = (newSize > 0) ? newSize : 0;
+      if (this->size > 0) {
+        this->phanSoArr = new PhanSo *[this->size];
+        for (int i = 0; i < this->size; ++i) {
+          this->phanSoArr[i] = new PhanSo();
+        }
+      }
+    }
+  }
 
-	PhanSo** getArr() const { return phanSoArr; }
+  void setArr(PhanSo **ps, int newSize) {
+    clearArray();
+    this->size = (newSize > 0) ? newSize : 0;
+    if (this->size > 0 && ps != nullptr) {
+      this->phanSoArr = new PhanSo *[this->size];
+      for (int i = 0; i < this->size; ++i) {
+        if (ps[i] != nullptr) {
+          this->phanSoArr[i] = new PhanSo(ps[i]);
+        } else {
+          this->phanSoArr[i] = nullptr;
+        }
+      }
+    }
+  }
 
-	friend istream& operator>>(istream& in, MyPhanSoArray* myA) {
-		if (myA == nullptr) return in;
+  int getSize() const { return size; }
 
-		myA->clearArray();
+  PhanSo **getArr() const { return phanSoArr; }
 
-		cout << "Nhap kich thuoc mang: ";
-		in >> myA->size;
+  friend istream &operator>>(istream &in, MyPhanSoArray *myA) {
+    if (myA == nullptr) return in;
 
-		if (myA->size > 0) {
-			myA->phanSoArr = new PhanSo * [myA->size];
-			cout << "Nhap " << myA->size << " phan so:\n";
-			for (int i = 0; i < myA->size; ++i) {
-				cout << "Phan so thu " << i + 1 << ": ";
-				myA->phanSoArr[i] = new PhanSo();
-				in >> *(myA->phanSoArr[i]);
-			}
-		}
-		return in;
-	}
+    myA->clearArray();
 
-	friend ostream& operator<<(ostream& out, const MyPhanSoArray* myA) {
-		if (myA == nullptr) {
-			out << "NULL Array";
-			return out;
-		}
+    cout << "Nhap kich thuoc mang: ";
+    in >> myA->size;
 
-		out << "[";
-		for (int i = 0; i < myA->size; ++i) {
-			if (myA->phanSoArr[i] != nullptr) {
-				out << *(myA->phanSoArr[i]);
-			}
-			else {
-				out << "NULL";
-			}
-			if (i < myA->size - 1) {
-				out << ", ";
-			}
-		}
-		out << "]";
-		return out;
-	}
+    if (myA->size > 0) {
+      myA->phanSoArr = new PhanSo *[myA->size];
+      cout << "Nhap " << myA->size << " phan so:\n";
+      for (int i = 0; i < myA->size; ++i) {
+        cout << "Phan so thu " << i + 1 << ": ";
+        myA->phanSoArr[i] = new PhanSo();
+        in >> *(myA->phanSoArr[i]);
+      }
+    }
+    return in;
+  }
 
-	PhanSo* operator[](const int& idx) {
-		if (idx < 0 || idx >= size) {
-			return nullptr;
-		}
-		return phanSoArr[idx];
-	}
+  friend ostream &operator<<(ostream &out, const MyPhanSoArray *myA) {
+    if (myA == nullptr) {
+      out << "NULL Array";
+      return out;
+    }
 
-	PhanSo* findMax() {
-		if (size == 0) return nullptr;
+    out << "[";
+    for (int i = 0; i < myA->size; ++i) {
+      if (myA->phanSoArr[i] != nullptr) {
+        out << *(myA->phanSoArr[i]);
+      } else {
+        out << "NULL";
+      }
+      if (i < myA->size - 1) {
+        out << ", ";
+      }
+    }
+    out << "]";
+    return out;
+  }
 
-		PhanSo* maxPs = nullptr;
-		for (int i = 0; i < size; ++i) {
-			if (phanSoArr[i] != nullptr) {
-				if (maxPs == nullptr || *phanSoArr[i] > *maxPs) {
-					maxPs = phanSoArr[i];
-				}
-			}
-		}
-		return maxPs;
-	}
+  PhanSo *operator[](const int &idx) {
+    if (idx < 0 || idx >= size) {
+      return nullptr;
+    }
+    return phanSoArr[idx];
+  }
 
-	PhanSo* findMin() {
-		if (size == 0) return nullptr;
+  PhanSo *findMax() {
+    if (size == 0) return nullptr;
 
-		PhanSo* minPs = nullptr;
-		for (int i = 0; i < size; ++i) {
-			if (phanSoArr[i] != nullptr) {
-				if (minPs == nullptr || *phanSoArr[i] < *minPs) {
-					minPs = phanSoArr[i];
-				}
-			}
-		}
-		return minPs;
-	}
+    PhanSo *maxPs = nullptr;
+    for (int i = 0; i < size; ++i) {
+      if (phanSoArr[i] != nullptr) {
+        if (maxPs == nullptr || *phanSoArr[i] > *maxPs) {
+          maxPs = phanSoArr[i];
+        }
+      }
+    }
+    return maxPs;
+  }
 
-	// Them cuoi mang
-	bool add(PhanSo* ps) {
-		if (ps == nullptr) return false;
+  PhanSo *findMin() {
+    if (size == 0) return nullptr;
 
-		PhanSo** newArr = new PhanSo * [size + 1];
+    PhanSo *minPs = nullptr;
+    for (int i = 0; i < size; ++i) {
+      if (phanSoArr[i] != nullptr) {
+        if (minPs == nullptr || *phanSoArr[i] < *minPs) {
+          minPs = phanSoArr[i];
+        }
+      }
+    }
+    return minPs;
+  }
 
-		for (int i = 0; i < size; ++i) {
-			newArr[i] = phanSoArr[i];
-		}
+  // Them cuoi mang
+  bool add(PhanSo *ps) {
+    if (ps == nullptr) return false;
 
-		newArr[size] = new PhanSo(ps);
+    PhanSo **newArr = new PhanSo *[size + 1];
 
-		delete[] phanSoArr;
+    for (int i = 0; i < size; ++i) {
+      newArr[i] = phanSoArr[i];
+    }
 
-		phanSoArr = newArr;
-		size++;
-		return true;
-	}
+    newArr[size] = new PhanSo(ps);
 
-	// Them dau mang
-	bool insert(PhanSo* ps) {
-		if (ps == nullptr) return false;
+    delete[] phanSoArr;
 
-		PhanSo** newArr = new PhanSo * [size + 1];
+    phanSoArr = newArr;
+    size++;
+    return true;
+  }
 
-		newArr[0] = new PhanSo(ps);
+  // Them dau mang
+  bool insert(PhanSo *ps) {
+    if (ps == nullptr) return false;
 
-		for (int i = 0; i < size; ++i) {
-			newArr[i + 1] = phanSoArr[i];
-		}
+    PhanSo **newArr = new PhanSo *[size + 1];
 
-		delete[] phanSoArr;
-		phanSoArr = newArr;
-		size++;
-		return true;
-	}
+    newArr[0] = new PhanSo(ps);
 
-	bool remove(int idx) {
-		if (idx < 0 || idx >= size || size == 0) return false;
+    for (int i = 0; i < size; ++i) {
+      newArr[i + 1] = phanSoArr[i];
+    }
 
-		delete phanSoArr[idx];
-		phanSoArr[idx] = nullptr;
+    delete[] phanSoArr;
+    phanSoArr = newArr;
+    size++;
+    return true;
+  }
 
-		for (int i = idx; i < size - 1; ++i) {
-			phanSoArr[i] = phanSoArr[i + 1];
-		}
+  bool remove(int idx) {
+    if (idx < 0 || idx >= size || size == 0) return false;
 
-		size--;
+    delete phanSoArr[idx];
+    phanSoArr[idx] = nullptr;
 
-		PhanSo** newArr = nullptr;
-		if (size > 0) {
-			newArr = new PhanSo * [size];
-			for (int i = 0; i < size; ++i) {
-				newArr[i] = phanSoArr[i];
-			}
-		}
-		delete[] phanSoArr;
-		phanSoArr = newArr;
+    for (int i = idx; i < size - 1; ++i) {
+      phanSoArr[i] = phanSoArr[i + 1];
+    }
 
-		return true;
-	}
+    size--;
 
-	bool removeAll() {
-		if (size == 0) return false;
-		clearArray();
-		return true;
-	}
+    PhanSo **newArr = nullptr;
+    if (size > 0) {
+      newArr = new PhanSo *[size];
+      for (int i = 0; i < size; ++i) {
+        newArr[i] = phanSoArr[i];
+      }
+    }
+    delete[] phanSoArr;
+    phanSoArr = newArr;
 
-	void sort() {
-		if (size <= 1) return;
+    return true;
+  }
 
-		for (int i = 0; i < size - 1; ++i) {
-			for (int j = 0; j < size - 1 - i; ++j) {
-				if (phanSoArr[j] != nullptr && phanSoArr[j + 1] != nullptr) {
-					if (*(phanSoArr[j]) > *(phanSoArr[j + 1])) {
-						PhanSo* temp = phanSoArr[j];
-						phanSoArr[j] = phanSoArr[j + 1];
-						phanSoArr[j + 1] = temp;
-					}
-				}
-			}
-		}
-	}
+  bool removeAll() {
+    if (size == 0) return false;
+    clearArray();
+    return true;
+  }
+
+  void sort() {
+    if (size <= 1) return;
+
+    for (int i = 0; i < size - 1; ++i) {
+      for (int j = 0; j < size - 1 - i; ++j) {
+        if (phanSoArr[j] != nullptr && phanSoArr[j + 1] != nullptr) {
+          if (*(phanSoArr[j]) > *(phanSoArr[j + 1])) {
+            PhanSo *temp     = phanSoArr[j];
+            phanSoArr[j]     = phanSoArr[j + 1];
+            phanSoArr[j + 1] = temp;
+          }
+        }
+      }
+    }
+  }
 };
