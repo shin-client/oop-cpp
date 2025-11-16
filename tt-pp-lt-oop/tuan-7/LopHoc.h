@@ -20,6 +20,9 @@ class LopHoc {
       : tenLop(tenLop), siSo(siSo) {
     this->dsHocSinh = new HocSinh*[siSo];
     for (int i = 0; i < siSo; ++i) {
+      // * -> Toán tử Giải tham chiếu (Dereference Operator). Sẽ lấy giá trị (đối tượng)
+      // & -> Toán tử Lấy Địa chỉ (Address-of Operator)
+      // & -> Tham chiếu (Reference)
       this->dsHocSinh[i] = new HocSinh(*dsHocSinh[i]);
     }
   }

@@ -67,6 +67,8 @@ class HocSinh {
   }
 
   string getTen() const {
+    // size_t là kiểu dữ liệu đúng đắn và an toàn nhất để biểu thị kích thước và số lượng trong C++,
+    // vì nó đảm bảo tính di động (portability) của code giữa các nền tảng 32-bit và 64-bit.
     size_t lastSpacePos = hoTen.find_last_of(" ");
 
     if (lastSpacePos != string::npos) return hoTen.substr(lastSpacePos + 1);

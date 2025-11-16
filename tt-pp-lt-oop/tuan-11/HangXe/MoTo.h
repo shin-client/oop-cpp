@@ -49,11 +49,11 @@ class MoTo {
     return out;
   }
 
-  bool operator>(MoTo mt) { return phanKhoi > mt.phanKhoi; }
+  bool operator>(const MoTo& mt) { return phanKhoi > mt.phanKhoi; }
 
-  bool operator>=(MoTo mt) { return phanKhoi >= mt.phanKhoi; }
+  bool operator>=(const MoTo& mt) { return phanKhoi >= mt.phanKhoi; }
 
-  bool operator<(MoTo mt) { return phanKhoi < mt.phanKhoi; }
+  bool operator<(const MoTo& mt) { return phanKhoi < mt.phanKhoi; }
 
-  bool operator<=(MoTo mt) { return phanKhoi <= mt.phanKhoi; }
+  bool operator<=(const MoTo& mt) { return phanKhoi <= mt.phanKhoi; }
 };
